@@ -20,6 +20,7 @@
         </annotations>
 
         <before>
+            <magentoCLI command="downloadable:domains:add" arguments="example.com static.magento.com" stepKey="addDownloadableDomain"/>
             <magentoCLI stepKey="enableGuestCheckoutForDownloadable" command="config:set catalog/downloadable/disable_guest_checkout 0" />
             <createData entity="FullSource1" stepKey="createSource"/>
             <createData entity="BasicMsiStockWithMainWebsite1" stepKey="createStock"/>
@@ -59,6 +60,8 @@
             <actionGroup ref="AdminFormSaveAndClose" stepKey="saveAndCloseProduct"/>
         </before>
         <after>
+            <magentoCLI command="downloadable:domains:remove" arguments="example.com static.magento.com" stepKey="removeDownloadableDomain"/>
+
             <!--Assign Default Stock to Default Website.-->
             <actionGroup ref="AssignWebsiteToStockActionGroup" stepKey="assignMainWebsiteToDefaultStock">
                 <argument name="stockName" value="{{_defaultStock.name}}"/>
@@ -68,6 +71,7 @@
             <actionGroup ref="DisableSourceActionGroup" stepKey="disableSource">
                 <argument name="sourceCode" value="$$createSource.source[source_code]$$"/>
             </actionGroup>
+            <deleteData createDataKey="createStock" stepKey="deleteStock"/>
             <deleteData createDataKey="createCategory" stepKey="deleteCategory"/>
             <deleteData createDataKey="downloadableProduct" stepKey="deleteProduct"/>
             <actionGroup ref="logout" stepKey="logoutOfAdmin"/>
