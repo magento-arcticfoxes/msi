@@ -71,7 +71,6 @@
             <actionGroup ref="DisableSourceActionGroup" stepKey="disableSource">
                 <argument name="sourceCode" value="$$createSource.source[source_code]$$"/>
             </actionGroup>
-            <deleteData createDataKey="createStock" stepKey="deleteStock"/>
             <deleteData createDataKey="createCategory" stepKey="deleteCategory"/>
             <deleteData createDataKey="downloadableProduct" stepKey="deleteProduct"/>
             <actionGroup ref="logout" stepKey="logoutOfAdmin"/>
